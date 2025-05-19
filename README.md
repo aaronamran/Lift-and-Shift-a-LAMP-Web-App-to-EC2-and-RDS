@@ -251,7 +251,7 @@
 
 - Now open `index.php` in web browser to see if it now works as expected <br />
   ![image](https://github.com/user-attachments/assets/78b87581-8d81-403c-ba71-ff2d7603851d) <br />
-  It finally works after a lengthy troubleshooting process. The rest of the homelab project can continue
+  It finally works after a lengthy troubleshooting process. The rest of the homelab project can continue. Add a few names such as Ben, Cass and Amanda in the web app
 
 - Export the DB for future migration
   ```
