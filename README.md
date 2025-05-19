@@ -194,16 +194,19 @@
   ```
   Try with the password `your_mysql_password` <br />
   ![image](https://github.com/user-attachments/assets/0326ac5a-b407-4bed-a42f-6d9bece0869b) <br />
-  Apparently access is denied due to typo error during initial password setup
+  Apparently access is denied due to unexpected typo errors during initial password setup
 
 - To fully reset MySQL root password, first thing to do is to stop the MySQL service
   ```
   sudo systemctl stop mysql
   ```
+  
 - Then start MySQL in safe mode to skip permission checks 
   ```
   sudo mysqld_safe --skip-grant-tables &
   ```
+  ![image](https://github.com/user-attachments/assets/59b1f73a-79d9-4e2a-b45c-340f0165c6e2) <br />
+
 - Open another terminal and connect to MySQL
   ```
   mysql -u root
