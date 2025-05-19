@@ -1,4 +1,4 @@
-# Lift-and-Shift a LAMP Web App to EC2 and RDS
+![image](https://github.com/user-attachments/assets/eff7508a-060d-4647-bf80-19b2bbdf62f8)# Lift-and-Shift a LAMP Web App to EC2 and RDS
 
 
 1. [Building and Testing the LAMP App Locally](#building-and-testing-the-lamp-app-locally)
@@ -124,7 +124,26 @@
   ```
   ![image](https://github.com/user-attachments/assets/6b8d3d8d-1d6d-4350-8051-5f2954393994) <br />
 
-- Test the web app. Open a web browser and go to `http://<your-lubuntu-ip>/index.php`. The MySQL connection message should be displayed
+- Test the web app. Open a web browser and go to `http://<your-lubuntu-ip>/index.php`. The MySQL connection message should be displayed.
+- Surprisingly, nothing is displayed in the web browser despite correct code and URL address <br />
+  ![image](https://github.com/user-attachments/assets/82dc9911-8973-419c-b4af-27d0d2b8fbd2) <br />
+
+- Reconfirm that the PHP file is serving from the `/var/www/html` directory. Use
+  ```
+  ls -l /var/www/html/
+  ```
+  It will also display the Linux file permissions <br />
+  ![image](https://github.com/user-attachments/assets/138f1939-7e54-4fc1-94f9-f1bc72b507e8) <br />
+
+- Check if Apache is actually listening on port 80. Run
+  ```
+  sudo netstat -tulnp | grep apache
+  ```
+  or
+  ```
+  sudo ss -tuln | grep :80
+  ```
+  ![image](https://github.com/user-attachments/assets/2880d265-1cb3-4de4-a68f-a935fa3595d3) <br />
 
 - Export the DB for future migration
   ```
