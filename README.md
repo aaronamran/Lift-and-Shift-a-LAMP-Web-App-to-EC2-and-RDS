@@ -144,6 +144,38 @@
   ```
   ![image](https://github.com/user-attachments/assets/2880d265-1cb3-4de4-a68f-a935fa3595d3) <br />
 
+- Since the `/var/www/html` directory has an `index.html` file, it is opened in the web browser to confirm if it can be accessed <br />
+  ![image](https://github.com/user-attachments/assets/6f2657a9-bb47-48e7-918f-1cb410dd2d39) <br />
+
+- Check if PHP is really installed. If yes, restart Apache service and check its status
+  ```
+  php -v
+  sudo systemctl restart apache2
+  sudo systemctl status apache2
+  ```
+  ![image](https://github.com/user-attachments/assets/a1c41716-e5b1-4ab0-a527-07df8a8e3cda) <br />
+
+- To confirm if Apache is parsing PHP, create a test file
+  ```
+  echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php
+  ```
+  Then open it in the web browser <br />
+  ![image](https://github.com/user-attachments/assets/722c385e-1ef9-4a1c-9f68-0ecf5324fe7d) <br />
+  ![image](https://github.com/user-attachments/assets/1d82204f-e297-4aa8-bfe3-907d85188bb8) <br />
+
+- Since PHP is working, another troubleshooting step is to prioritiese `index.php` before `index.html`
+  ```
+  sudo nano /etc/apache2/mods-enabled/dir.conf
+  ```
+  ![image](https://github.com/user-attachments/assets/4bf28df6-683d-419a-b9e3-5402eae6881f) <br />
+  Then make sure it looks like the following
+  ```
+  DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+  ```
+  ![image](https://github.com/user-attachments/assets/e17b8e3d-81e8-44c8-918b-554be8a115aa) <br />
+  Once this is done, reload Apache and reopen `index.php` in the web browser <br />
+  ![image](https://github.com/user-attachments/assets/5d572917-2c3d-499a-82c4-2d44772140a9) <br />
+
 - Export the DB for future migration
   ```
   mysqldump -u root -p testdb > testdb.sql
