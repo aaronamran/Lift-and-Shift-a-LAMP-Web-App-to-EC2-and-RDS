@@ -206,17 +206,36 @@
   sudo mysqld_safe --skip-grant-tables &
   ```
   ![image](https://github.com/user-attachments/assets/59b1f73a-79d9-4e2a-b45c-340f0165c6e2) <br />
+  The error `Directory '/var/run/mysqld' for UNIX socket file doesn't exist.` means that MySQL/MariaDB can't start because the directory where it writes its socket file doesn't exist yet.
+  To fix it, run the following
+  ```
+  sudo mkdir -p /var/run/mysqld
+  sudo chown mysql:mysql /var/run/mysqld
+  ```
+  Then try starting MySQL again with
+  ```
+  sudo mysqld_safe --skip-grant-tables &
+  ```
+  ![image](https://github.com/user-attachments/assets/e00787c3-bd1a-4957-9399-1c469b910db3) <br />
 
 - Open another terminal and connect to MySQL
   ```
   mysql -u root
   ```
+  ![image](https://github.com/user-attachments/assets/f2b34eb6-f86e-450e-84c9-70edbf225b43) <br />
+
 
 - Set a new password then exit
   ```
   FLUSH PRIVILEGES;
   ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'newpassword';
   ```
+  ![image](https://github.com/user-attachments/assets/1ec1de6e-7100-473d-9b6e-cc7ecc0c24fd) <br />
+  A stronger password such as `NewP@ssw0rd123!` is required
+  ```
+  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'NewP@ssw0rd123!';
+  ```
+  ![image](https://github.com/user-attachments/assets/1e59e183-aabe-4696-9ab0-4a7119a7836b) <br />
 
 - Stop the safe-mode MySQL and restart the service normally
   ```
@@ -227,8 +246,12 @@
   ```
   mysql -u root -p
   ```
-- Now open `index.php` in web browser to see if it now works as expected
+  ![image](https://github.com/user-attachments/assets/53c32062-0b9f-4a56-a8e6-5dcf9a67acc9) <br />
+  ![image](https://github.com/user-attachments/assets/2635e16f-cfa3-4745-b0c4-54881d1c9d84) <br />
 
+- Now open `index.php` in web browser to see if it now works as expected <br />
+  ![image](https://github.com/user-attachments/assets/78b87581-8d81-403c-ba71-ff2d7603851d) <br />
+  It finally works after a lengthy troubleshooting process. The rest of the homelab project can continue
 
 - Export the DB for future migration
   ```
