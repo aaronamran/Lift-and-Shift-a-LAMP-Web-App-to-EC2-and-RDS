@@ -117,6 +117,12 @@
   ```
   ![image](https://github.com/user-attachments/assets/fc67671e-9732-4270-8e05-05b8517965f2) <br />
 
+- Check if both Apache and MySQL services are running
+  ```
+  sudo systemctl status apache2
+  sudo systemctl status mysql
+  ```
+  ![image](https://github.com/user-attachments/assets/6b8d3d8d-1d6d-4350-8051-5f2954393994) <br />
 
 - Test the web app. Open a web browser and go to `http://<your-lubuntu-ip>/index.php`. The MySQL connection message should be displayed
 
