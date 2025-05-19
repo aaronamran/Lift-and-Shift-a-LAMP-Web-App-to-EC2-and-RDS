@@ -28,8 +28,10 @@
 - Create a sample LAMP app
   ```
   cd /var/www/html/
-  touch index.php
+  sudo touch index.php
   ```
+  ![image](https://github.com/user-attachments/assets/d97cea61-146c-48ac-b864-8e50d6a17b21) <br />
+
   Use the following PHP code below
   ```
   <?php
@@ -40,12 +42,15 @@
   echo "Connected to MySQL successfully!";
   ?>
   ```
+  ![image](https://github.com/user-attachments/assets/c5b5fbeb-0d14-44a3-a376-b94eea8c4562) <br />
 
-- Create MySQL DB
+- Create MySQL DB. The password to be entered is literally `your_mysql_password`
   ```
   sudo mysql -u root -p
   CREATE DATABASE testdb;
   ```
+  ![image](https://github.com/user-attachments/assets/a1fe690e-0f6b-462f-828c-ecefc952a6f7) <br />
+  
 
 - Test the web app. Open a web browser and go to `http://<your-lubuntu-ip>/index.php`. The MySQL connection message should be displayed
 
