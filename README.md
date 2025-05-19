@@ -1,10 +1,16 @@
 # Lift-and-Shift a LAMP Web App to EC2 and RDS
 
 
-1. []()
+1. [Building and Testing the LAMP App Locally](#building-and-testing-the-lamp-app-locally)
+2. [Configuring VPC and Subnets](#configuring-vpc-and-subnets)
+3. [Configuring Security Groups and IAM](#configuring-security-groups-and-iam)
+4. [Provisioning EC2 Instance and Deploying Web App](#provisioning-ec2-instance-and-deploying-web-app)
+5. [Provisioning RDS MySQL](#provisioning-rds-mysql)
+6. [Scripting Backup to S3](#scripting-backup-to-s3)
+7. [Monitoring, Scaling, and Load Balancing](#monitoring-scaling-and-load-balancing)
 
 
-## Build and Test the LAMP App Locally
+## Building and Testing the LAMP App Locally
 - In the Lubuntu VM, install Apache, MySQL and PHP
   ```
   sudo apt update
@@ -45,7 +51,7 @@
   mysqldump -u root -p testdb > testdb.sql
   ```
 
-## VPC and Subnets
+## Configuring VPC and Subnets
 - Create a custom VPC. CIDR block: 10.0.0.0/16
 - Create subnets
   Public subnet (e.g., 10.0.1.0/24)
@@ -60,7 +66,7 @@
   Private route table: route 0.0.0.0/0 to NAT Gateway (optional)
 
 
-## Security Groups and IAM
+## Configuring Security Groups and IAM
 - Security Groups
   Web-SG (for EC2):
   Allow HTTP (80), HTTPS (443) from anywhere (0.0.0.0/0)
@@ -74,7 +80,7 @@
   Attach to EC2 instance
 
 
-## Provision EC2 Instance and Deploy Web App
+## Provisioning EC2 Instance and Deploying Web App
 - Launch EC2 Instance
 
   AMI: Amazon Linux 2 or Ubuntu
@@ -104,7 +110,7 @@
   Place it in `/var/www/html`
 
 
-## Provision RDS MySQL
+## Provisioning RDS MySQL
 
 - Launch RDS instance
 
@@ -132,7 +138,7 @@
 - Update the web app DB host to point to RDS
 
 
-## Backup to S3
+## Scripting Backup to S3
 - Create S3 bucket
   Name: `lamp-db-backups-yourname`
 - Backup script (on EC2)
@@ -156,7 +162,7 @@
   0 2 * * * /home/ec2-user/backup.sh
   ```
 
-## Monitoring, Scaling, and Load Balancer
+## Monitoring, Scaling, and Load Balancing
 - Enable CloudWatch Alarms
   EC2 CPU > 70%
   
