@@ -16,11 +16,14 @@
   sudo apt update
   sudo apt install apache2 mysql-server php libapache2-mod-php php-mysql -y
   ```
+  ![image](https://github.com/user-attachments/assets/754241b8-146e-44a3-9b21-f762664eab1d) <br />
 
 - Secure MySQL
   ```
   sudo mysql_secure_installation
   ```
+  ![image](https://github.com/user-attachments/assets/eec875b7-975b-4454-b1f1-4815464ba454) <br />
+  ![image](https://github.com/user-attachments/assets/9279b46a-fc4d-4dc8-8a82-c1966062c093) <br />
 
 - Create a sample LAMP app
   ```
