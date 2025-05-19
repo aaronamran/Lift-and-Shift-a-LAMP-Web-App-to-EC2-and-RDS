@@ -258,6 +258,9 @@
   ```
   mysqldump -u root -p testdb > testdb.sql
   ```
+  When prompted for the password, use the MySQL password, not the Lubuntu password <br />
+  ![image](https://github.com/user-attachments/assets/c3fce542-4f76-4616-a9a2-5b303bd8ee70) <br />
+  
 
 ## Configuring VPC and Subnets
 - Create a custom VPC. CIDR block: 10.0.0.0/16
