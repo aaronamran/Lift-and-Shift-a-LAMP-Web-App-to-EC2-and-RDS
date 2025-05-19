@@ -1,5 +1,4 @@
-![image](https://github.com/user-attachments/assets/eff7508a-060d-4647-bf80-19b2bbdf62f8)# Lift-and-Shift a LAMP Web App to EC2 and RDS
-
+# Lift-and-Shift a LAMP Web App to EC2 and RDS
 
 1. [Building and Testing the LAMP App Locally](#building-and-testing-the-lamp-app-locally)
 2. [Configuring VPC and Subnets](#configuring-vpc-and-subnets)
