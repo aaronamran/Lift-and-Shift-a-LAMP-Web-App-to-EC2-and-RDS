@@ -35,14 +35,57 @@
   Use the following PHP code below
   ```
   <?php
-  $conn = new mysqli("localhost", "root", "your_mysql_password", "testdb");
+  $servername = "localhost";
+  $username = "root";
+  $password = "your_mysql_password";
+  $dbname = "testdb";
+  
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  
+  // Check connection
   if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
   }
-  echo "Connected to MySQL successfully!";
+  
+  // Handle form submission
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $name = $conn->real_escape_string($_POST["name"]);
+      $sql = "INSERT INTO users (name) VALUES ('$name')";
+      if ($conn->query($sql) === TRUE) {
+          echo "New record created successfully.<br>";
+      } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+  }
+  
+  // Display form
   ?>
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <title>Simple LAMP Web App</title>
+  </head>
+  <body>
+      <h1>Submit Your Name</h1>
+      <form method="post">
+          <input type="text" name="name" placeholder="Enter your name" required>
+          <input type="submit" value="Submit">
+      </form>
+      <h2>Stored Users</h2>
+      <ul>
+          <?php
+          $result = $conn->query("SELECT name, created_at FROM users ORDER BY id DESC");
+          while($row = $result->fetch_assoc()) {
+              echo "<li>" . htmlspecialchars($row["name"]) . " - " . $row["created_at"] . "</li>";
+          }
+          ?>
+      </ul>
+  </body>
+  </html>
+  <?php $conn->close(); ?>
   ```
-  ![image](https://github.com/user-attachments/assets/c5b5fbeb-0d14-44a3-a376-b94eea8c4562) <br />
+   <br />
 
 - Create MySQL DB. The password to be entered is literally `your_mysql_password`
   ```
@@ -50,7 +93,16 @@
   CREATE DATABASE testdb;
   ```
   ![image](https://github.com/user-attachments/assets/a1fe690e-0f6b-462f-828c-ecefc952a6f7) <br />
-  
+
+  Create a table in testdb, then exit
+  ```
+  USE testdb;
+  CREATE TABLE users (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(100) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+  ```
 
 - Test the web app. Open a web browser and go to `http://<your-lubuntu-ip>/index.php`. The MySQL connection message should be displayed
 
