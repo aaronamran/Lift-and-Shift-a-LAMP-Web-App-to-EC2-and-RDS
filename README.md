@@ -175,6 +175,57 @@
   ![image](https://github.com/user-attachments/assets/e17b8e3d-81e8-44c8-918b-554be8a115aa) <br />
   Once this is done, reload Apache and reopen `index.php` in the web browser <br />
   ![image](https://github.com/user-attachments/assets/5d572917-2c3d-499a-82c4-2d44772140a9) <br />
+  Unfortunately a blank page is still being displayed
+
+- Since PHP disables error reporting by default as a security measure, add the following code into `index.php`
+  ```
+  <?php
+  error_reporting(E_ALL);
+  ini_set('display_errors', 1);
+  ?>
+  ```
+  ![image](https://github.com/user-attachments/assets/795892ed-1253-4cd3-8b3b-5c2de62b9170) <br />
+
+- Reloading the web browser now gives us this information <br />
+  ![image](https://github.com/user-attachments/assets/33bfc894-4cb2-41d0-8433-8528c0d9530d) <br />
+  This means the PHP script is trying to connect to MySQL as root, but either the password is incorrect, or the root user is not allowed to connect from the web server (localhost via PHP). Double-check the MySQL root password
+  ```
+  mysql -u root -p
+  ```
+  Try with the password `your_mysql_password` <br />
+  ![image](https://github.com/user-attachments/assets/0326ac5a-b407-4bed-a42f-6d9bece0869b) <br />
+  Apparently access is denied due to typo error during initial password setup
+
+- To fully reset MySQL root password, first thing to do is to stop the MySQL service
+  ```
+  sudo systemctl stop mysql
+  ```
+- Then start MySQL in safe mode to skip permission checks 
+  ```
+  sudo mysqld_safe --skip-grant-tables &
+  ```
+- Open another terminal and connect to MySQL
+  ```
+  mysql -u root
+  ```
+
+- Set a new password then exit
+  ```
+  FLUSH PRIVILEGES;
+  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'newpassword';
+  ```
+
+- Stop the safe-mode MySQL and restart the service normally
+  ```
+  sudo killall mysqld
+  sudo systemctl start mysql
+  ```
+  Update `index.php` with the new password and test the new password
+  ```
+  mysql -u root -p
+  ```
+- Now open `index.php` in web browser to see if it now works as expected
+
 
 - Export the DB for future migration
   ```
