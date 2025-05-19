@@ -85,7 +85,7 @@
   </html>
   <?php $conn->close(); ?>
   ```
-   <br />
+  ![image](https://github.com/user-attachments/assets/00226836-7a4c-4cff-bc0d-2f589e072416) <br />
 
 - Create MySQL DB. The password to be entered is literally `your_mysql_password`
   ```
@@ -94,7 +94,7 @@
   ```
   ![image](https://github.com/user-attachments/assets/a1fe690e-0f6b-462f-828c-ecefc952a6f7) <br />
 
-  Create a table in testdb, then exit
+  Then create a table in testdb
   ```
   USE testdb;
   CREATE TABLE users (
@@ -103,6 +103,20 @@
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
   ```
+  To view tables in MySQL, use
+  ```
+  SHOW TABLES;
+  ```
+  And to describe the table's structure, use
+  ```
+  DESCRIBE users;
+  ```
+  Use the following command to query the table to see the data
+  ```
+  SELECT * FROM users;
+  ```
+  ![image](https://github.com/user-attachments/assets/fc67671e-9732-4270-8e05-05b8517965f2) <br />
+
 
 - Test the web app. Open a web browser and go to `http://<your-lubuntu-ip>/index.php`. The MySQL connection message should be displayed
 
